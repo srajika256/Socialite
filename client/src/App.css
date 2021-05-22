@@ -1,0 +1,62 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@400;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
+
+.brand-logo{
+    /* font-family: 'Lobster Two', cursive; */
+    /* font-family: 'Lobster', cursive; */
+    font-family: 'Pacifico', cursive;
+}
+
+.mycard {
+    margin-top: 70px;
+}
+
+
+.auth-card{
+    padding: 20px;
+    text-align: center;
+    max-width: 600px;
+    margin: 10px auto;
+    margin-top: 10px;
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #00c853 !important;
+    box-shadow: 0 1px 0 0 #00c853 !important;
+  }
+
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #00c853 !important;
+    box-shadow: 0 1px 0 0 #00c853 !important;
+  }
+  
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.item{
+    width : 30%;
+    margin : 15px;
+}
+.home-card{
+    max-width: 600px;
+    height: max-content;
+    margin: 26px auto
+}
+
+
+#toast-container{
+    top : 30px;
+    right : 20px;
+    left : auto;
+}
+
+
+.material-icons:hover{
+    cursor: pointer;
+}
+
