@@ -6,7 +6,9 @@ import {UserContext} from '../../App'
 function Profile() {
     const [mypics,setPics] = useState([])
     const {state,dispatch} = useContext(UserContext)
-
+    const [image,setImage] = useState("")
+    const [url,setUrl] = useState(undefined)
+   
     // console.log(state)
 
     useEffect(() => {
@@ -22,9 +24,11 @@ function Profile() {
             // console.log(mypics)
         })
     },[])
- 
-    const updatePhoto = ()=>{
-        const data = new FormData()
+
+    useEffect(() => {
+        if(image)
+        {
+            const data = new FormData()
             data.append("file",image)
             data.append("upload_preset","socialite")
             data.append("cloud_name","socialite9000")
@@ -38,10 +42,17 @@ function Profile() {
             .then(data => {
                 console.log(data)
                setUrl(data.url)
+               localStorage.setItem("user",JSON.stringify({...state,pic:data.url}))
+               dispatch({type:"UPDATEPIC",payload:data.url})
             })
             .catch(err => {
                 console.log(err)
-            })  
+            })
+        }
+    },[image])
+ 
+    const updatePhoto = (file)=>{
+          setImage(file)
     }
     
 
@@ -60,17 +71,28 @@ function Profile() {
                         src = {state?state.pic:"Loading"}
                         />
                     </div>
-                    <div style = {{
-                        marginBottom: "10px"
-                    }}>
-                    <button className = "btn waves-effect waves-light  #00c853 green accent-4"
-                       onClick={()=>{
-                           updatePhoto()
-                       }}
-                       >
-                    Update Profile
-                    </button>
+                   
+                   
+                    <div style = {{marginBottom: "10px"}}>
+                    {/* <button className = "btn waves-effect waves-light  #00c853 green accent-4"
+                        onClick={()=>{updatePhoto()}}>
+                        Update Profile
+                    </button> */}
+                    <div className="file-field input-field">
+                        <div className="btn #00c853 green accent-4">
+                            <span> Update Profile</span>
+                            
+                            <input type="file" 
+                            onChange = {(e) => {updatePhoto(e.target.files[0])}}
+                            />
+                            
+                        </div>
+                        <div className="file-path-wrapper">
+                            <input className="file-path validate" type="text" />
+                        </div>
                     </div>
+                    </div>
+
 
                 </div>
 
@@ -79,8 +101,8 @@ function Profile() {
                    
                     <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                         <h6>{mypics.length} posts</h6>
-                        <h6>{state.followers.length} followers</h6>
-                        <h6>{state.following.length} following</h6>
+                        <h6>{state?state.followers.length:0} followers</h6>
+                        <h6>{state?state.following.length:0} following</h6>
                     </div>
 
 
